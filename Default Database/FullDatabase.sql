@@ -14784,7 +14784,7 @@ CREATE TABLE IF NOT EXISTS `custom_nick_icons_catalog` (
   `sort_order` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_icon_key` (`icon_key`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table habbo.custom_nick_icons_catalog: ~6 rows (approximately)
 DELETE FROM `custom_nick_icons_catalog`;
@@ -14803,7 +14803,7 @@ CREATE TABLE IF NOT EXISTS `custom_prefix_blacklist` (
   `word` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_word` (`word`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table habbo.custom_prefix_blacklist: ~4 rows (approximately)
 DELETE FROM `custom_prefix_blacklist`;
@@ -14819,7 +14819,7 @@ CREATE TABLE IF NOT EXISTS `custom_prefix_settings` (
   `key_name` varchar(100) NOT NULL,
   `value` varchar(255) NOT NULL,
   PRIMARY KEY (`key_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table habbo.custom_prefix_settings: ~8 rows (approximately)
 DELETE FROM `custom_prefix_settings`;
@@ -14848,7 +14848,7 @@ CREATE TABLE IF NOT EXISTS `custom_prefixes_catalog` (
   `enabled` tinyint(1) NOT NULL DEFAULT 1,
   `sort_order` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table habbo.custom_prefixes_catalog: ~3 rows (approximately)
 DELETE FROM `custom_prefixes_catalog`;
@@ -28544,7 +28544,7 @@ CREATE TABLE IF NOT EXISTS `permission_definitions` (
   `rank_6` tinyint(3) unsigned NOT NULL DEFAULT 0,
   `rank_7` tinyint(3) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`permission_key`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_uca1400_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci ROW_FORMAT=DYNAMIC;
 
 -- Dumping data for table habbo.permission_definitions: ~201 rows (approximately)
 DELETE FROM `permission_definitions`;
@@ -28771,7 +28771,7 @@ CREATE TABLE IF NOT EXISTS `permission_ranks` (
   `auto_gotw_amount` int(11) DEFAULT 0,
   `auto_points_amount` int(11) DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_uca1400_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci ROW_FORMAT=DYNAMIC;
 
 -- Dumping data for table habbo.permission_ranks: ~7 rows (approximately)
 DELETE FROM `permission_ranks`;
@@ -30600,7 +30600,7 @@ CREATE TABLE IF NOT EXISTS `user_nick_icons` (
   UNIQUE KEY `uk_user_icon` (`user_id`,`icon_key`),
   KEY `idx_user_id` (`user_id`),
   KEY `idx_user_active` (`user_id`,`active`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table habbo.user_nick_icons: ~0 rows (approximately)
 DELETE FROM `user_nick_icons`;
@@ -30635,7 +30635,7 @@ CREATE TABLE IF NOT EXISTS `user_visual_settings` (
   `user_id` int(11) NOT NULL,
   `display_order` varchar(50) NOT NULL DEFAULT 'icon-prefix-name',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table habbo.user_visual_settings: ~0 rows (approximately)
 DELETE FROM `user_visual_settings`;
