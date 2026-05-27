@@ -163,6 +163,13 @@ final class AuthHttpUtil {
         return "nitro-" + Base64.getUrlEncoder().withoutPadding().encodeToString(buf);
     }
 
+    static String ticketPreview(String ticket) {
+        if (ticket == null || ticket.isEmpty()) return "<empty>";
+        int head = Math.min(10, ticket.length());
+        int tail = Math.min(6, Math.max(0, ticket.length() - head));
+        return ticket.substring(0, head) + "…" + ticket.substring(ticket.length() - tail);
+    }
+
     static String mintResetToken() {
         byte[] buf = new byte[32];
         RNG.nextBytes(buf);

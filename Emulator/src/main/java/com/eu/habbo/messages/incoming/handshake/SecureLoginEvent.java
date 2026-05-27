@@ -73,6 +73,7 @@ public class SecureLoginEvent extends MessageHandler {
         }
 
         String sso = this.packet.readString().replace(" ", "");
+        LOGGER.info("[auth/ws] received SSO ticket={}", ticketPreview(sso));
 
         if (Emulator.getPluginManager().fireEvent(new SSOAuthenticationEvent(sso)).isCancelled()) {
             Emulator.getGameServer().getGameClientManager().disposeClient(this.client);
@@ -113,6 +114,9 @@ public class SecureLoginEvent extends MessageHandler {
                 }
             } catch (Exception e) {
                 LOGGER.error("Caught exception looking up user for session resume", e);
+            }
+            if (lookupUserId <= 0) {
+                LOGGER.warn("[auth/ws] SSO not found or expired before loadHabbo ticket={}", ticketPreview(sso));
             }
 
             // Check if this user has a ghost session (disconnected within grace period)
@@ -343,10 +347,18 @@ public class SecureLoginEvent extends MessageHandler {
                 }
             } else {
                 Emulator.getGameServer().getGameClientManager().disposeClient(this.client);
-                LOGGER.warn("Someone tried to login with a non-existing SSO token! Closed connection...");
+                LOGGER.warn("Someone tried to login with a non-existing SSO token! Closed connection. ticket={}",
+                        ticketPreview(sso));
             }
         } else {
             Emulator.getGameServer().getGameClientManager().disposeClient(this.client);
         }
+    }
+
+    private static String ticketPreview(String ticket) {
+        if (ticket == null || ticket.isEmpty()) return "<empty>";
+        int head = Math.min(10, ticket.length());
+        int tail = Math.min(6, Math.max(0, ticket.length() - head));
+        return ticket.substring(0, head) + "…" + ticket.substring(ticket.length() - tail);
     }
 }

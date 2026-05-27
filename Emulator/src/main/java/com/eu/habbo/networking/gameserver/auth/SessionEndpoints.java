@@ -59,7 +59,7 @@ final class SessionEndpoints {
 
                 if (userId > 0) {
                     try (PreparedStatement clear = conn.prepareStatement(
-                            "UPDATE users SET auth_ticket = '', online = '0' WHERE id = ? LIMIT 1")) {
+                            "UPDATE users SET auth_ticket = '', auth_ticket_expires_at = NULL, online = '0' WHERE id = ? LIMIT 1")) {
                         clear.setInt(1, userId);
                         clear.executeUpdate();
                     }
@@ -101,12 +101,14 @@ final class SessionEndpoints {
 
             String ssoTicket = mintSsoTicket();
             try (PreparedStatement upd = conn.prepareStatement(
-                    "UPDATE users SET auth_ticket = ?, ip_current = ? WHERE id = ? LIMIT 1")) {
+                    "UPDATE users SET auth_ticket = ?, auth_ticket_expires_at = NULL, ip_current = ? WHERE id = ? LIMIT 1")) {
                 upd.setString(1, ssoTicket);
                 upd.setString(2, ip == null ? "" : ip);
                 upd.setInt(3, rot.userId);
                 upd.executeUpdate();
             }
+            LOGGER.info("[auth/remember] issued SSO for userId={} username='{}' ticket={}",
+                    rot.userId, rot.username, AuthHttpUtil.ticketPreview(ssoTicket));
 
             JsonObject ok = new JsonObject();
             ok.addProperty("ssoTicket", ssoTicket);
@@ -247,12 +249,14 @@ final class SessionEndpoints {
                     String ssoTicket = mintSsoTicket();
 
                     try (PreparedStatement upd = conn.prepareStatement(
-                            "UPDATE users SET auth_ticket = ?, ip_current = ? WHERE id = ? LIMIT 1")) {
+                            "UPDATE users SET auth_ticket = ?, auth_ticket_expires_at = NULL, ip_current = ? WHERE id = ? LIMIT 1")) {
                         upd.setString(1, ssoTicket);
                         upd.setString(2, ip == null ? "" : ip);
                         upd.setInt(3, userId);
                         upd.executeUpdate();
                     }
+                    LOGGER.info("[auth/login] issued SSO for userId={} username='{}' ticket={}",
+                            userId, rs.getString("username"), AuthHttpUtil.ticketPreview(ssoTicket));
 
                     String rememberToken = null;
                     if (rememberMe) {

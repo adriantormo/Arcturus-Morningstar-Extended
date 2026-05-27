@@ -132,7 +132,7 @@ public class HabboManager {
                     }
 
                     if (!Emulator.debugging) {
-                        try (PreparedStatement stmt = connection.prepareStatement("UPDATE users SET auth_ticket = ? WHERE id = ? LIMIT 1")) {
+                        try (PreparedStatement stmt = connection.prepareStatement("UPDATE users SET auth_ticket = ?, auth_ticket_expires_at = NULL WHERE id = ? LIMIT 1")) {
                             stmt.setString(1, "");
                             stmt.setInt(2, habbo.getHabboInfo().getId());
                             stmt.execute();
