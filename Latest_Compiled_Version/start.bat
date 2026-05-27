@@ -5,7 +5,7 @@ title HabboRP - Arcturus Morningstar
 
 set "ROOT=D:\laragon\www\habborp"
 set "EMU_RUN=%ROOT%\Arcturus-Morningstar-Extended\Latest_Compiled_Version"
-set "JAR=Habbo-4.2.16-jar-with-dependencies.jar"
+set "JAR=Habbo-4.2.20-jar-with-dependencies.jar"
 
 echo.
 echo ==========================================
