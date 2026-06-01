@@ -28,16 +28,27 @@ public class UserProfileComposer extends MessageComposer {
     private final HabboInfo habboInfo;
     private Habbo habbo;
     private GameClient viewer;
+    private boolean openProfileWindow;
 
     public UserProfileComposer(HabboInfo habboInfo, GameClient viewer) {
+        this(habboInfo, viewer, true);
+    }
+
+    public UserProfileComposer(HabboInfo habboInfo, GameClient viewer, boolean openProfileWindow) {
         this.habboInfo = habboInfo;
         this.viewer = viewer;
+        this.openProfileWindow = openProfileWindow;
     }
 
     public UserProfileComposer(Habbo habbo, GameClient viewer) {
+        this(habbo, viewer, true);
+    }
+
+    public UserProfileComposer(Habbo habbo, GameClient viewer, boolean openProfileWindow) {
         this.habbo = habbo;
         this.habboInfo = habbo.getHabboInfo();
         this.viewer = viewer;
+        this.openProfileWindow = openProfileWindow;
     }
 
     @Override
@@ -111,7 +122,7 @@ public class UserProfileComposer extends MessageComposer {
         }
 
         this.response.appendInt(Emulator.getIntUnixTimestamp() - this.habboInfo.getLastOnline()); //Secs ago.
-        this.response.appendBoolean(true);
+        this.response.appendBoolean(this.openProfileWindow);
 
         this.response.appendInt(this.habboInfo.getInfostandBg());
         this.response.appendInt(this.habboInfo.getInfostandStand());

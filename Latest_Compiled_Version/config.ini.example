@@ -20,6 +20,11 @@ crypto.ws.signing.private_key=
 #Host IP. Most likely just 0.0.0.0 Use 127.0.0.1 if you want to play on LAN.
 game.host=0.0.0.0
 game.port=3000
+# Launch the emulator dashboard UI.
+gui.enabled=true
+
+# Wired signal safety limit.
+wired.signal.max.depth=100
 
 #RCON Configuration.
 #RCON Host IP. Leave this at 127.0.0.1 if you're running your website on the same server as the emulator.
