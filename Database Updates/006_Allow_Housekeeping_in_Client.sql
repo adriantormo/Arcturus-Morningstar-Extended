@@ -4,3 +4,19 @@ ON DUPLICATE KEY UPDATE
     `max_value` = VALUES(`max_value`),
     `comment` = VALUES(`comment`),
     `rank_7` = 1;
+
+
+CREATE TABLE IF NOT EXISTS `housekeeping_log` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `timestamp` INT NOT NULL,
+  `actor_id` INT NOT NULL,
+  `actor_name` VARCHAR(64) NOT NULL DEFAULT '',
+  `target_type` VARCHAR(16) NOT NULL DEFAULT 'user',
+  `target_id` INT NOT NULL DEFAULT 0,
+  `target_label` VARCHAR(128) NOT NULL DEFAULT '',
+  `action` VARCHAR(64) NOT NULL DEFAULT '',
+  `detail` VARCHAR(500) NOT NULL DEFAULT '',
+  `success` TINYINT NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  KEY `timestamp` (`timestamp`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
